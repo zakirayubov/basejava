@@ -1,14 +1,11 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collector;
 
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    private  int size = 0;
+    private int size = 0;
 
     void clear() {
         for (int i = 0; i < size; i++) {
@@ -19,18 +16,15 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] == null) {
-                storage[i] = r;
-                size++;
-                break;
-            }
+        if (size + 1 < storage.length) {
+            storage[size] = r;
+            size++;
         }
     }
 
     Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid == uuid) {
+            if (storage[i].uuid.equals(uuid)) {
                 return storage[i];
             }
         }
@@ -38,13 +32,19 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < storage.length; i++) {
+        int index = 0;
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                storage[i] = null;
-                size--;
+                index = i;
                 break;
             }
         }
+
+
+        final int newSize;
+        if ((newSize = size - 1) > index)
+            System.arraycopy(storage, index + 1, storage, index, newSize - index);
+        storage[size = newSize] = null;
     }
 
     /**
