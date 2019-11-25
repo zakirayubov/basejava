@@ -16,7 +16,7 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (size + 1 < storage.length) {
+        if (size  < storage.length) {
             storage[size] = r;
             size++;
         }
@@ -40,11 +40,9 @@ public class ArrayStorage {
             }
         }
 
-
-        final int newSize;
-        if ((newSize = size - 1) > index)
-            System.arraycopy(storage, index + 1, storage, index, newSize - index);
-        storage[size = newSize] = null;
+        System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
+        size--;
+        storage[size] = null;
     }
 
     /**
