@@ -14,32 +14,29 @@ public abstract class AbstractArrayStorage extends AbstractStorage implements St
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
     @Override
-    public void doUpdate(Resume r, Object index) {
-        storage[(int) index] = r;
+    protected void doUpdate(Resume r, Object index) {
+        storage[(Integer) index] = r;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    @Override
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
     @Override
-    public void doSave(Resume r, Object index) {
+    protected void doSave(Resume r, Object index) {
         if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", r.getUuid());
         } else {
@@ -55,9 +52,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage implements St
         size--;
     }
 
-    @Override
     public Resume doGet(Object index) {
-        return storage[(int) index];
+        return storage[(Integer) index];
     }
 
     @Override
