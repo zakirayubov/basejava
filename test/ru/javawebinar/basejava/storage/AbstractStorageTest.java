@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 import static ru.javawebinar.basejava.storage.AbstractArrayStorage.STORAGE_LIMIT;
 
 
-public abstract class AbstractArrayStorageTest {
+public abstract class AbstractStorageTest {
     private Storage storage;
 
     private static final String UUID_1 = "uuid1";
@@ -31,7 +31,7 @@ public abstract class AbstractArrayStorageTest {
 
 
 
-    protected AbstractArrayStorageTest(Storage storage) {
+    protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
