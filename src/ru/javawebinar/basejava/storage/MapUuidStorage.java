@@ -2,16 +2,13 @@ package ru.javawebinar.basejava.storage;
 
 import ru.javawebinar.basejava.model.Resume;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MapUuidStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected String getSearchKey(String uuid) {
         return uuid;
     }
 
@@ -27,27 +24,27 @@ public class MapUuidStorage extends AbstractStorage {
 
     @Override
     protected void doSave(Resume r, Object uuid) {
-        map.put(r.getUuid(), r);
+        map.put((String) uuid, r);
     }
 
     @Override
     protected Resume doGet(Object uuid) {
-        return map.get(uuid);
+        return map.get((String) uuid);
     }
 
     @Override
     protected void doDelete(Object uuid) {
-        map.remove(uuid);
-    }
-
-    @Override
-    protected List<Resume> doCopyAll() {
-        return new ArrayList<>(map.values());
+        map.remove((String) uuid);
     }
 
     @Override
     public void clear() {
         map.clear();
+    }
+
+    @Override
+    public List<Resume> doCopyAll() {
+        return new ArrayList<>(map.values());
     }
 
     @Override
