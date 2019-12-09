@@ -7,20 +7,18 @@ import ru.javawebinar.basejava.model.Resume;
 
 import static ru.javawebinar.basejava.storage.AbstractArrayStorage.STORAGE_LIMIT;
 
-public abstract class AbstractArrayStorageTest extends  AbstractStorageTest {
-    private Storage storage;
+public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
 
     protected AbstractArrayStorageTest(Storage storage) {
         super(storage);
-        this.storage = storage;
     }
 
 
     @Test(expected = StorageException.class)
     public void saveOverflow() throws Exception {
         try {
-            for (int i = 4; i < STORAGE_LIMIT+1; i++) {
-                storage.save(new Resume("name surname"));
+            for (int i = 4; i < STORAGE_LIMIT + 1; i++) {
+                storage.save(new Resume("Name" + i));
             }
         } catch (StorageException e) {
             Assert.fail();
