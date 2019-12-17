@@ -29,5 +29,17 @@ public class MainFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("_____________________________");
+        printFile(dir);
+    }
+
+    public static void printFile(File file) {
+        for (File files : file.listFiles()) {
+            if (files.isDirectory()) {
+                printFile(files);
+            } else {
+                System.out.println(files.getName());
+            }
+        }
     }
 }
