@@ -29,16 +29,21 @@ public class MainFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("_____________________________");
-        printFile(dir);
+
+        printDirectoryDeeply(dir, "");
     }
 
-    public static void printFile(File file) {
-        for (File files : file.listFiles()) {
-            if (files.isDirectory()) {
-                printFile(files);
-            } else {
-                System.out.println(files.getName());
+    public static void printDirectoryDeeply(File dir, String offset) {
+        File[] files = dir.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    System.out.println(offset + "F: " + file.getName());
+                } else if (file.isDirectory()) {
+                    System.out.println(offset + "D: " + file.getName());
+                    printDirectoryDeeply(file, offset + "  ");
+                }
             }
         }
     }
