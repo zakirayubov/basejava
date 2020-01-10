@@ -1,8 +1,6 @@
 package ru.javawebinar.basejava.storage;
 
-import ru.javawebinar.basejava.model.*;
-
-import java.time.Month;
+import ru.javawebinar.basejava.model.Resume;
 
 public class ResumeTestData {
     public static final String UUID_1 = "uuid1";
@@ -21,6 +19,7 @@ public class ResumeTestData {
         RESUME_3 = new Resume(UUID_3, "Name3");
         RESUME_4 = new Resume(UUID_4, "Name4");
 
+/*
         RESUME_1.addContact(ContactType.PHONE, "11111");
         RESUME_1.addContact(ContactType.MAIL, "mail.ru");
         RESUME_1.addContact(ContactType.GITHUB, "https://github.com/");
@@ -46,6 +45,7 @@ public class ResumeTestData {
                 new OrganizationSection(
                         new Organization("Organization2", "http://Organization2.ru",
                                 new Organization.Position(2015, Month.JANUARY, "position1", "content1"))));
+*/
     }
 
 
