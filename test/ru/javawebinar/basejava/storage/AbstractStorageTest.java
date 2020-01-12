@@ -5,10 +5,12 @@ import org.junit.Test;
 import ru.javawebinar.basejava.Config;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
+import ru.javawebinar.basejava.model.ContactType;
 import ru.javawebinar.basejava.model.Resume;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -47,6 +49,9 @@ public abstract class AbstractStorageTest {
     @Test
     public void update() throws Exception {
         Resume newResume = new Resume(UUID_1, "New Name");
+        newResume.addContact(ContactType.MAIL, "mail1@google.com");
+        newResume.addContact(ContactType.SKYPE, "NewSkype");
+        newResume.addContact(ContactType.MOBILE, "+7 921 222-22-22");
         storage.update(newResume);
         assertTrue(newResume.equals(storage.get(UUID_1)));
     }
@@ -60,7 +65,9 @@ public abstract class AbstractStorageTest {
     public void getAllSorted() throws Exception {
         List<Resume> list = storage.getAllSorted();
         assertEquals(3, list.size());
-        assertEquals(list, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
+        List<Resume> sortedResumes = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        Collections.sort(sortedResumes);
+        assertEquals(sortedResumes, list);
     }
 
     @Test
@@ -74,7 +81,6 @@ public abstract class AbstractStorageTest {
     public void saveExist() throws Exception {
         storage.save(RESUME_1);
     }
-
 
     @Test(expected = NotExistStorageException.class)
     public void delete() throws Exception {

@@ -1,5 +1,6 @@
 package ru.javawebinar.basejava.storage;
 
+import ru.javawebinar.basejava.model.ContactType;
 import ru.javawebinar.basejava.model.Resume;
 
 import java.util.UUID;
@@ -21,9 +22,13 @@ public class ResumeTestData {
         RESUME_3 = new Resume(UUID_3, "Name3");
         RESUME_4 = new Resume(UUID_4, "Name4");
 
-/*
+
+        RESUME_1.addContact(ContactType.MAIL, "mail1@ya.ru");
         RESUME_1.addContact(ContactType.PHONE, "11111");
-        RESUME_1.addContact(ContactType.MAIL, "mail.ru");
+
+        RESUME_4.addContact(ContactType.PHONE, "44444");
+        RESUME_4.addContact(ContactType.SKYPE, "Skype");
+     /*   RESUME_1.addContact(ContactType.MAIL, "mail.ru");
         RESUME_1.addContact(ContactType.GITHUB, "https://github.com/");
         RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         RESUME_1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
