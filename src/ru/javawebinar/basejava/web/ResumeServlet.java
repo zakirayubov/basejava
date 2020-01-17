@@ -1,5 +1,7 @@
 package ru.javawebinar.basejava.web;
 
+import ru.javawebinar.basejava.Config;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ public class ResumeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setAttribute("resumes", Config.get().getStorage().getAllSorted());
+        request.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(request, response);
     }
 }
