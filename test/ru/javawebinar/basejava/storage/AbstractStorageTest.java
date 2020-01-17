@@ -15,13 +15,13 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static ru.javawebinar.basejava.storage.ResumeTestData.*;
-
+import static ru.javawebinar.basejava.TestData.*;
 
 public abstract class AbstractStorageTest {
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected Storage storage;
+
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -30,9 +30,9 @@ public abstract class AbstractStorageTest {
     @Before
     public void setUp() throws Exception {
         storage.clear();
-        storage.save(RESUME_1);
-        storage.save(RESUME_2);
-        storage.save(RESUME_3);
+        storage.save(R1);
+        storage.save(R2);
+        storage.save(R3);
     }
 
     @Test
@@ -65,21 +65,21 @@ public abstract class AbstractStorageTest {
     public void getAllSorted() throws Exception {
         List<Resume> list = storage.getAllSorted();
         assertEquals(3, list.size());
-        List<Resume> sortedResumes = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        List<Resume> sortedResumes = Arrays.asList(R1, R2, R3);
         Collections.sort(sortedResumes);
         assertEquals(sortedResumes, list);
     }
 
     @Test
     public void save() throws Exception {
-        storage.save(RESUME_4);
+        storage.save(R4);
         assertSize(4);
-        assertGet(RESUME_4);
+        assertGet(R4);
     }
 
     @Test(expected = ExistStorageException.class)
     public void saveExist() throws Exception {
-        storage.save(RESUME_1);
+        storage.save(R1);
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -96,9 +96,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void get() throws Exception {
-        assertGet(RESUME_1);
-        assertGet(RESUME_2);
-        assertGet(RESUME_3);
+        assertGet(R1);
+        assertGet(R2);
+        assertGet(R3);
     }
 
     @Test(expected = NotExistStorageException.class)
