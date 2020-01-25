@@ -39,7 +39,6 @@ public class ResumeServlet extends HttpServlet {
             r.setFullName(fullName);
         }
 
-
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
             if (HtmlUtil.isEmpty(value)) {
@@ -112,6 +111,11 @@ public class ResumeServlet extends HttpServlet {
                 response.sendRedirect("resume");
                 return;
             case "view":
+                r = storage.get(uuid);
+                break;
+            case "add":
+                r = Resume.EMPTY;
+                break;
             case "edit":
                 r = storage.get(uuid);
                 for (SectionType type : SectionType.values()) {
@@ -147,9 +151,6 @@ public class ResumeServlet extends HttpServlet {
                     }
                     r.setSection(type, section);
                 }
-                break;
-            case "add":
-                r = Resume.EMPTY;
                 break;
             default:
                 throw new IllegalArgumentException("Action " + action + " is illegal");
